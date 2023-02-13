@@ -1,0 +1,1366 @@
+<style>
+.loader_bola {
+  border: 16px solid #f3f3f3; /* Light grey */
+  border-top: 16px solid #3498db; /* Blue */
+  border-radius: 50%;
+  width: 100px;
+  height: 100px;
+  animation: spin 2s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+#map {
+
+        height: 400px;
+
+        width: 100%;
+
+       }
+</style>
+
+
+			<!-- general form elements -->
+              <div class="box box-success" tooltipPosition="auto" data-step="2" 
+              data-intro="<strong>Absensi</strong> Merupakan fasilitas utama dalam aplikasi ini, cara kerjanya mudah dan simple<br>
+              			  Kamu hanya menekan tombol <strong>Absen Masuk</strong> untuk melakukan absen masuk, tombol 
+              			  <strong>Absen Pulang</strong> untuk melakukan absensi pulang, tapi nanti Kamu
+              			  jangan kaget ya karena sistem yang kami buat bisa di bilang middle protection, dimana jika terjadi
+              			  kesalahan seperti: <br><strong>Keterlabatan</strong>, <strong>Pulang kurang dari 8 jam kerja</strong>,  
+              			  <strong>Login diluar Area kantor</strong>, dll <br>maka
+              			  sistem secara otomatis akan memproteksi dan meragukan absensi Kamu, bila terjadi kesalahan seperti itu
+              			  segera melakukan konfirmasi ke pihak SDM.">
+                <div class="box-header">
+                  <h3 class="box-title">Absensi <small><?php echo $tgl->tgl_indo($date);?></small></h3>
+                  <!-- tools box -->
+                  <div class="pull-right box-tools">
+                  	<button class="btn btn-info btn-sm" data-widget='collapse' data-toggle="tooltip" title="Collapse"><i class="fa fa-minus"></i></button>
+                    <button class="btn btn-info btn-sm" data-widget='remove' data-toggle="tooltip" title="Remove"><i class="fa fa-times"></i></button>
+                  </div><!-- /. tools -->
+                </div><!-- /.box-header -->
+                <div class="box-header">
+                
+				<div class="col-sm-5">
+                <form action="" method="post">			   
+                	<?php
+			
+					$abs_tgl_masuk=$date;
+					$abs_tampil_kar=$abt->abs_tampil_kar($kar_idtst,$abs_tgl_masuk);
+					$data=mysql_fetch_array($abs_tampil_kar);
+					$cek=mysql_num_rows($abs_tampil_kar);
+					
+					$kar_idtst = $data['kar_id'];
+					
+					if($cek == 0){
+						$waktu=$time;
+						$t=explode(":",$waktu);
+						if($t[0]=="00"){
+							$jam="24";
+						}else{
+							$jam=$t[0];
+						}
+						$menit=$t[1];
+
+						//NEW CHANGE
+					    $waktu_jam_menit=substr($time, 0,5);
+						$jam="14";
+						$menit="00";
+						$waktu_jam_menit="14:00";
+						$akhir = date('H:i', strtotime('+120 minutes', strtotime($waktu_jam_menit)));
+						// echo $waktu_jam_menit;
+						// echo "<br>";
+						// echo $akhir;
+						//Range Pagi
+						$abs_stm_nm="Jam Telat Pagi";
+						$abs_settime_id=$abt->abs_settime_id($abs_stm_nm);
+						$abs_settime_data=mysql_fetch_array($abs_settime_id);
+						if(!empty($kar_data['ktr_default_shift1_in']) && !empty($kar_data['ktr_default_shift1_out'])){
+							if(!empty($kar_data['kar_default_shift1_in']) && !empty($kar_data['kar_default_shift1_out'])){
+								$jam_telat_pagi=substr($kar_data['kar_default_shift1_in'], 0,5);
+							}else{
+								$jam_telat_pagi=substr($kar_data['ktr_default_shift1_in'], 0,5);
+							}
+						}else{
+							if(!empty($kar_data['kar_default_shift1_in']) && !empty($kar_data['kar_default_shift1_out'])){
+								$jam_telat_pagi=substr($kar_data['kar_default_shift1_in'], 0,5);
+							}else{
+								$jam_telat_pagi=substr($abs_settime_data['abs_stm_jam'], 0,5);
+							}
+						}						
+
+						//Range Siang
+						$abs_stm_nm="Jam Telat Siang";
+						$abs_settime_id=$abt->abs_settime_id($abs_stm_nm);
+						$abs_settime_data=mysql_fetch_array($abs_settime_id);
+						if(!empty($kar_data['ktr_default_shift2_in']) && !empty($kar_data['ktr_default_shift2_out'])){
+							if(!empty($kar_data['kar_default_shift2_in']) && !empty($kar_data['kar_default_shift2_out'])){
+								$jam_telat_siang=substr($kar_data['kar_default_shift2_in'], 0,5);
+							}else{
+								$jam_telat_siang=substr($kar_data['ktr_default_shift2_in'], 0,5);
+							}
+						}else{
+							if(!empty($kar_data['kar_default_shift2_in']) && !empty($kar_data['kar_default_shift2_out'])){
+								$jam_telat_siang=substr($kar_data['kar_default_shift2_in'], 0,5);
+							}else{
+								$jam_telat_siang=substr($abs_settime_data['abs_stm_jam'], 0,5);
+							}
+						}
+
+						//Range Sore
+						$abs_stm_nm="Jam Telat Sore";
+						$abs_settime_id=$abt->abs_settime_id($abs_stm_nm);
+						$abs_settime_data=mysql_fetch_array($abs_settime_id);
+						if(!empty($kar_data['ktr_default_shift3_in']) && !empty($kar_data['ktr_default_shift3_out'])){
+							if(!empty($kar_data['kar_default_shift3_in']) && !empty($kar_data['kar_default_shift3_out'])){
+								$jam_telat_sore=substr($kar_data['kar_default_shift3_in'], 0,5);
+							}else{
+								$jam_telat_sore=substr($kar_data['ktr_default_shift3_in'], 0,5);
+							}
+						}else{
+							if(!empty($kar_data['kar_default_shift3_in']) && !empty($kar_data['kar_default_shift3_out'])){
+								$jam_telat_sore=substr($kar_data['kar_default_shift3_in'], 0,5);
+							}else{
+								$jam_telat_sore=substr($abs_settime_data['abs_stm_jam'], 0,5);
+							}
+						}
+
+						//Range Malam
+						$abs_stm_nm="Jam Telat Malam";
+						$abs_settime_id=$abt->abs_settime_id($abs_stm_nm);
+						$abs_settime_data=mysql_fetch_array($abs_settime_id);
+						if(!empty($kar_data['ktr_default_shift4_in']) && !empty($kar_data['ktr_default_shift4_out'])){
+							if(!empty($kar_data['kar_default_shift4_in']) && !empty($kar_data['kar_default_shift4_out'])){
+								$jam_telat_malam=substr($kar_data['kar_default_shift4_in'], 0,5);
+							}else{
+								$jam_telat_malam=substr($kar_data['ktr_default_shift4_in'], 0,5);
+							}
+						}else{
+							if(!empty($kar_data['kar_default_shift4_in']) && !empty($kar_data['kar_default_shift4_out'])){
+								$jam_telat_malam=substr($kar_data['kar_default_shift4_in'], 0,5);
+							}else{
+								$jam_telat_malam=substr($abs_settime_data['abs_stm_jam'], 0,5);
+							}
+						}
+
+
+						if ($jam >= 00 and $jam < 10 ){
+							if ($menit >=00 and $menit<60){
+							$ucapan="Shift Pagi";
+							$checked_pagi="checked";
+								if($waktu_jam_menit > $jam_telat_pagi){
+									$type="button";
+									$name="";
+									$toggle="modal";
+									//$target="#masuk_telat";
+									
+									$target="#masuk";
+									$dispaly="";
+									$title_rajin="display:none";
+									$title_telat="";
+
+									//Tampil selisih terlambat
+									$start_date = new DateTime(''.$date.' '.$jam_telat_pagi.'');
+									$since_start = $start_date->diff(new DateTime(''.$date.' '.$time.''));
+									if($since_start->h > 0){
+										$jam_telat=$since_start->h." Jam ".$since_start->i." Menit ".$since_start->s." Detik ";
+									}else{
+										$jam_telat=$since_start->i." Menit ".$since_start->s." Detik ";
+									}
+										
+
+								}
+								else{
+									$type="button";
+									$name="";
+									$toggle="modal";
+									$target="#masuk";
+									
+									$dispaly="display:none";
+									$title_rajin="";
+									$title_telat="display:none";
+								}
+							}
+						}else if ($jam >= 10 and $jam < 13 ){
+							if ($menit >=00 and $menit<60){
+							$ucapan="Shift Siang";
+							$checked_siang="checked";
+								if($waktu_jam_menit > $jam_telat_siang){
+									$type="button";
+									$name="";
+									$toggle="modal";
+									//$target="#masuk_telat";
+									
+									
+									$target="#masuk";
+									$dispaly="";
+									$title_rajin="display:none";
+									$title_telat="";
+									
+									//Tampil selisih terlambat
+									$start_date = new DateTime(''.$date.' '.$jam_telat_siang.'');
+									$since_start = $start_date->diff(new DateTime(''.$date.' '.$time.''));
+										if($since_start->h > 0){
+										$jam_telat=$since_start->h." Jam ".$since_start->i." Menit ".$since_start->s." Detik ";
+									}else{
+										$jam_telat=$since_start->i." Menit ".$since_start->s." Detik ";
+									}
+
+								}else{
+									$type="button";
+									$name="";
+									$toggle="modal";
+									$target="#masuk";
+									
+									$dispaly="display:none";
+									$title_rajin="";
+									$title_telat="display:none";
+								}
+							}
+						}else if ($jam >= 13 and $jam < 18 ){
+							if ($menit >=00 and $menit<60){
+							$ucapan="Shift Sore";
+							$checked_sore="checked";
+								if($waktu_jam_menit > $jam_telat_sore){
+									$type="button";
+									$name="";
+									$toggle="modal";
+									//$target="#masuk_telat";
+									
+									
+									$target="#masuk";
+									$dispaly="";
+									$title_rajin="display:none";
+									$title_telat="";
+									
+									//Tampil selisih terlambat
+									$start_date = new DateTime(''.$date.' '.$jam_telat_sore.'');
+									$since_start = $start_date->diff(new DateTime(''.$date.' '.$time.''));
+										if($since_start->h > 0){
+										$jam_telat=$since_start->h." Jam ".$since_start->i." Menit ".$since_start->s." Detik ";
+									}else{
+										$jam_telat=$since_start->i." Menit ".$since_start->s." Detik ";
+									}
+
+								}else{
+									$type="button";
+									$name="";
+									$toggle="modal";
+									$target="#masuk";
+									
+									$dispaly="display:none";
+									$title_rajin="";
+									$title_telat="display:none";
+								}
+							}
+						}else if ($jam >= 18 and $jam <= 24 ){
+							if ($menit >=00 and $menit<60){
+							$ucapan="Shift Malam";
+							$checked_malam="checked";
+								
+									$type="button";
+									$name="";
+									$toggle="modal";
+									$target="#masuk";
+									
+									$dispaly="display:none";
+									$title_rajin="";
+									$title_telat="display:none";
+						
+							}
+						}else {
+							$ucapan="Error";
+						}
+					?>
+					<?php
+                    	$waktu=$time;
+						$t=explode(":",$waktu);
+						if($t[0]=="00"){
+							$jam="24";
+						}else{
+							$jam=$t[0];
+						}
+						$menit=$t[1];
+
+						if ($jam > 07 and $jam < 24 ){
+							if ($menit >00 and $menit<60){
+					?>
+					<?php
+					if($inihp){
+					?>
+					<!-- penambahan 1 -->
+                	<button type="<?php echo $type; ?>" name="<?php echo $name; ?>"  id="submitmasuk"  class="btn btn-primary btn-lg"><i class="fa fa-sign-in"></i> Absen Masukk<br><?php //echo $exp_datanya[$date_intnya]; ?> </button>
+					<div id="posisi"></div>
+				    <div id="status"></div>
+					<!-- penambahan 1 -->
+					<?php }else{?>
+					<!-- penambahan 1 -->
+                	<button type="<?php echo $type; ?>" name="<?php echo $name; ?>"  id="submitmasuk"  class="btn btn-primary btn-lg"><i class="fa fa-sign-in"></i> Absen Masukk<br><?php //echo $exp_datanya[$date_intnya]; ?> </button>
+					<div id="posisi"></div>
+				    <div id="status"></div>
+					<!-- penambahan 1 -->
+					<?php }?>
+					<!-- button lama 
+					<button type="<?php echo $type; ?>" name="<?php echo $name; ?>" data-toggle="<?php echo $toggle; ?>" data-target="<?php echo $target; ?>" class="btn btn-primary btn-lg"><i class="fa fa-sign-in"></i> Absen Masuk<br><?php echo $exp_datanya[$date_intnya]; ?> </button>-->
+					<br><br>
+	                <?php }}?>   
+	                    <?php
+	                    	$waktu=$time;
+							$t=explode(":",$waktu);
+							$jam=$t[0];
+							$menit=$t[1];
+
+							if ($jam >= 00 and $jam <= 07 ){
+								if ($menit >=00 and $menit<60){
+
+									$abs_tgl_las=$kemarin;
+									$abs_tampil_las=$abt->abs_tampil_las($kar_idtst,$abs_tgl_las);
+									$data_las=mysql_fetch_array($abs_tampil_las);
+									if($data_las['abs_sts']=="M"){
+										if($data_las['abs_shift']=="Shift Malam"){
+	                    ?>
+	                    	<button type="button" name="" data-toggle="modal" data-target="#pulangmalam" class="btn btn-success btn-lg"><i class="fa fa-sign-out"></i> Absen Pulang <br><small><small><small>Khusus Shift Malam</small></small></small></button>
+	                    	<!--<small class="help-block"><small>Akses Absensi akan ditutup setiap jam <strong>5:30</strong> - <strong>6:30 WIB</strong> lakukanlah absen pulang sebelum lewat dari jam yang sudah ditentukan. #IT-GG</small></small>-->
+	                    			<?php }else{?>
+									<!-- penambahan 2 -->
+	                    				<button type="<?php echo $type; ?>" name="<?php echo $name; ?>" data-toggle="<?php echo $toggle; ?>" data-target="#" id="submitmasuk" class="btn btn-primary btn-lg"><i class="fa fa-sign-in"></i> Absen Masukkk</button>
+										<div id="posisi"></div>
+										<div id="status"></div>
+									<!-- penambahan 2 -->									
+	                    			<?php }?>
+	                    <?php }else{?>
+						<?php
+						if($inihp){
+						?>
+						 <!-- penambahan 3 -->
+	                    	<button type="<?php echo $type; ?>" name="<?php echo $name; ?>" data-toggle="<?php echo $toggle; ?>" data-target="#" id="submitmasuk" class="btn btn-primary btn-lg"><i class="fa fa-sign-in"></i> Absen Masukkkk</button>	
+							<div id="posisi"></div>
+							<div id="status"></div>	
+						<?php }else{?>
+							<button type="<?php echo $type; ?>" name="" data-toggle="<?php echo $toggle; ?>" data-target="#" id="#"  class="btn btn-success btn-lg"><i class="fa fa-sign-in"></i> Wajib HP<br><?php //echo $exp_datanya[$date_intnya]; ?> </button>
+						<?php }?>
+						 <!-- penambahan 3 -->	
+	                    <?php }}}?>
+
+                    <?php
+					}elseif($data['abs_sts']=="M"){
+						$abs_tampil_kar=$abt->abs_tampil_kar($kar_idtst,$abs_tgl_masuk);
+						$abs_data=mysql_fetch_array($abs_tampil_kar);
+					  
+						//NEW CHANGE
+						$waktu_jam_menit=substr($time, 0,5);
+
+						//Range Pagi
+						$abs_stm_nm="Jam Cepat Pagi";
+						$abs_settime_id=$abt->abs_settime_id($abs_stm_nm);
+						$abs_settime_data=mysql_fetch_array($abs_settime_id);
+						if(!empty($kar_data['ktr_default_shift1_in']) && !empty($kar_data['ktr_default_shift1_out'])){
+							if(!empty($kar_data['kar_default_shift1_in']) && !empty($kar_data['kar_default_shift1_out'])){
+								$jam_cepat_pagi=substr($kar_data['kar_default_shift1_out'], 0,5);
+							}else{
+								$jam_cepat_pagi=substr($kar_data['ktr_default_shift1_out'], 0,5);
+							}
+						}else{
+							if(!empty($kar_data['kar_default_shift1_in']) && !empty($kar_data['kar_default_shift1_out'])){
+								$jam_cepat_pagi=substr($kar_data['kar_default_shift1_out'], 0,5);
+							}else{
+								$jam_cepat_pagi=substr($abs_settime_data['abs_stm_jam'], 0,5);
+							}
+						}
+
+						//Range Siang
+						$abs_stm_nm="Jam Cepat Siang";
+						$abs_settime_id=$abt->abs_settime_id($abs_stm_nm);
+						$abs_settime_data=mysql_fetch_array($abs_settime_id);
+						if(!empty($kar_data['ktr_default_shift2_in']) && !empty($kar_data['ktr_default_shift2_out'])){
+							if(!empty($kar_data['kar_default_shift2_in']) && !empty($kar_data['kar_default_shift2_out'])){
+								$jam_cepat_siang=substr($kar_data['kar_default_shift2_out'], 0,5);
+							}else{
+								$jam_cepat_siang=substr($kar_data['ktr_default_shift2_out'], 0,5);
+							}
+						}else{
+							if(!empty($kar_data['kar_default_shift2_in']) && !empty($kar_data['kar_default_shift2_out'])){
+								$jam_cepat_siang=substr($kar_data['kar_default_shift2_out'], 0,5);
+							}else{
+								$jam_cepat_siang=substr($abs_settime_data['abs_stm_jam'], 0,5);
+							}
+						}
+
+						//Range Sore
+						$abs_stm_nm="Jam Cepat Sore";
+						$abs_settime_id=$abt->abs_settime_id($abs_stm_nm);
+						$abs_settime_data=mysql_fetch_array($abs_settime_id);
+						if(!empty($kar_data['ktr_default_shift3_in']) && !empty($kar_data['ktr_default_shift3_out'])){
+							if(!empty($kar_data['kar_default_shift3_in']) && !empty($kar_data['kar_default_shift3_out'])){
+								$jam_cepat_sore=substr($kar_data['kar_default_shift3_out'], 0,5);
+							}else{
+								$jam_cepat_sore=substr($kar_data['ktr_default_shift3_out'], 0,5);
+							}
+						}else{
+							if(!empty($kar_data['kar_default_shift3_in']) && !empty($kar_data['kar_default_shift3_out'])){
+								$jam_cepat_sore=substr($kar_data['kar_default_shift3_out'], 0,5);
+							}else{
+								$jam_cepat_sore=substr($abs_settime_data['abs_stm_jam'], 0,5);
+							}
+						}
+
+						//Range Malam
+						$abs_stm_nm="Jam Cepat Malam";
+						$abs_settime_id=$abt->abs_settime_id($abs_stm_nm);
+						$abs_settime_data=mysql_fetch_array($abs_settime_id);
+						if(!empty($kar_data['ktr_default_shift4_in']) && !empty($kar_data['ktr_default_shift4_out'])){
+							if(!empty($kar_data['kar_default_shift4_in']) && !empty($kar_data['kar_default_shift4_out'])){
+								$jam_cepat_malam=substr($kar_data['kar_default_shift4_out'], 0,5);
+							}else{
+								$jam_cepat_malam=substr($kar_data['ktr_default_shift4_out'], 0,5);
+							}
+						}else{
+							if(!empty($kar_data['kar_default_shift4_in']) && !empty($kar_data['kar_default_shift4_out'])){
+								$jam_cepat_malam=substr($kar_data['kar_default_shift4_out'], 0,5);
+							}else{
+								$jam_cepat_malam=substr($abs_settime_data['abs_stm_jam'], 0,5);
+							}
+						}
+
+					    if($abs_data['abs_shift']=="Shift Pagi"){
+					    	if($waktu_jam_menit < $jam_cepat_pagi){
+
+					    	$type="button";
+							$name="";
+							$toggle="modal";
+							$target="#pulang";
+							$shift=$data['abs_shift'];
+							$message="Jam pulang anda adalah pukul $jam_cepat_pagi";
+							$title_cepat="";
+							$title_tepat="display:none";
+							$dispaly="";
+
+					    	}elseif($waktu_jam_menit >= $jam_cepat_pagi){
+
+					    		$type="button";
+							$name="";
+							$toggle="modal";
+							$target="#pulang";
+							$shift="";
+						        $message="";
+							$title_cepat="display:none";
+							$title_tepat="";
+							$dispaly="display:none";
+
+					    	}
+					    }elseif($abs_data['abs_shift']=="Shift Siang"){
+	    					if($waktu_jam_menit < $jam_cepat_siang){
+
+	    					    $type="button";
+						    $name="";
+						    $toggle="modal";
+						    $target="#pulang";
+						    $shift=$data['abs_shift'];
+						    $message="Jam pulang anda adalah pukul $jam_cepat_siang";
+						    $title_cepat="";
+						    $title_tepat="display:none";
+						    $dispaly="";
+
+	    					}elseif($waktu_jam_menit >= $jam_cepat_siang){
+
+	    						$type="button";
+							$name="";
+							$toggle="modal";
+							$target="#pulang";
+							$shift="";
+						        $message="";
+							$title_cepat="display:none";
+							$title_tepat="";
+							$dispaly="display:none";
+
+	    					}
+					    }elseif($abs_data['abs_shift']=="Shift Sore"){
+	    					if($waktu_jam_menit < $jam_cepat_sore){
+
+	    						$type="button";
+							$name="";
+							$toggle="modal";
+							$target="#pulang";
+							$shift=$data['abs_shift'];
+							$message="Jam pulang anda adalah pukul $jam_cepat_sore";
+							$title_cepat="";
+							$title_tepat="display:none";
+							$dispaly="";
+
+	    					}elseif($waktu_jam_menit >= $jam_cepat_sore){
+
+	    						$type="button";
+							$name="";
+							$toggle="modal";
+							$target="#pulang";
+							$shift="";
+						        $message="";
+							$title_cepat="display:none";
+							$title_tepat="";
+							$dispaly="display:none";
+
+	    					}
+					    }elseif($abs_data['abs_shift']=="Shift Malam"){
+
+	    					$type="button";
+							$name="";
+							$toggle="modal";
+							$target="#pulang";
+							$shift="";
+						        $message="";
+							$title_cepat="display:none";
+							$title_tepat="";
+							$dispaly="display:none";
+
+					    }
+							
+					?>	
+				   <input class="form-control" type="hidden" id="nik" value="<?php echo $nik;?>">
+					
+                    <button type="<?php echo $type; ?>" name="<?php echo $name; ?>" id="submit" 
+					data-toggle="<?php echo $toggle; ?>" data-target="<?php //echo $target; ?>" 
+					class="btn btn-danger btn-lg"><i class="fa fa-sign-out"></i> Absen Pulang <?php //echo $type;?>
+					</button>
+				
+					<?php
+                    }elseif($data['abs_sts']=="P"){
+                    ?>
+                    <button type="button" class="btn btn-danger btn-lg" disabled><i class="fa fa-smile-o"></i> See You Tomorrow</button>
+                    <?php
+					}
+					?>
+                </form>
+                </div>
+                <div class="col-sm-7">
+                <input type="text" class="h" value="0">
+				<input type="text" class="m" value="0">
+				<input type="text" class="s" value="0">
+				<span class="label label-default"><?php echo $shf->waktu_shift();?></span>
+				</div>
+
+                </div>
+                  <div class="box-body table-responsive no-padding">
+                    <table class="table table-hover">
+                    <?php
+					$abs_tgl_masuk=$date;
+					$abs_tampil_kar=$abt->abs_tampil_kar($kar_idtst,$abs_tgl_masuk);
+					while($data=mysql_fetch_array($abs_tampil_kar)){
+					  
+					  if(!empty($data[abs_alasan_masuk])){
+					    $alasan=$data['abs_alasan_masuk'];
+					  }else{
+					    $alasan="-";
+					  }
+					  
+						if($data['abs_rwd_masuk']=="Telat"){
+						  $lbl="danger";
+						}elseif($data['abs_rwd_masuk']=="Rajin"){
+						  $lbl="success";
+						}elseif($data['abs_rwd_masuk']=="Tepat"){
+						  $lbl="primary";
+						}
+						
+						
+					?>
+                    <tr>
+                      <td>Masuk</td>
+                      <td><?php echo $data['abs_masuk']; ?></td>
+                      <!--<td><?php //echo $data['abs_shift']; ?></td>-->
+                      <td><a data-toggle="tooltip" title="<?php echo $kar_data['ktr_nm']; ?>" style="cursor:pointer"><?php echo $kar_data['ktr_kd']; ?></a></td>
+                      <td><?php echo $tgl->tgl_indo($data['abs_tgl_masuk']); ?></td>
+                      <td><span class="label label-<?php echo $lbl; ?>"><?php echo $data['abs_rwd_masuk']; ?></span></td>
+                      <td><span data-toggle="tooltip" title="<?php echo $alasan; ?>" style="cursor:pointer">... <i class="fa fa-external-link"></i></span></td>
+                    </tr>
+                    <?php }?>
+                    <?php
+					$abs_tgl_masuk=$date;
+					$abs_tampil_kar=$abt->abs_tampil_kar($kar_idtst,$abs_tgl_masuk);
+					while($data=mysql_fetch_array($abs_tampil_kar)){
+					  
+					  if(!empty($data[abs_alasan_pulang])){
+					    $alasan=$data['abs_alasan_pulang'];
+					  }else{
+					    $alasan="-";
+					  }
+					
+					if($data[abs_sts]=="P"){	
+						if($data['abs_rwd_pulang']=="Izin"){
+						  $lbl="danger";
+						}elseif($data['abs_rwd_pulang']=="Loyal"){
+						  $lbl="success";
+						}elseif($data['abs_rwd_pulang']=="Tepat"){
+						  $lbl="primary";
+						}
+					?>
+                    <tr>
+                      <td>Pulang</td>
+                      <td><?php echo $data['abs_pulang']; ?></td>
+                      <!--<td><?php //echo $data['abs_shift']; ?></td>-->
+                      <td><a data-toggle="tooltip" title="<?php echo $kar_data['ktr_nm']; ?>" style="cursor:pointer"><?php echo $kar_data['ktr_kd']; ?></a></td>
+                      <td><?php echo $tgl->tgl_indo($data['abs_tgl_pulang']); ?></td>
+                      <td><span class="label label-<?php echo $lbl; ?>"><?php echo $data['abs_rwd_pulang']; ?></span></td>
+                      <td><span data-toggle="tooltip" title="<?php echo $alasan; ?>" style="cursor:pointer">... <i class="fa fa-external-link"></i></span></td>
+                    </tr>
+                    <?php }}?>
+                  </table>
+                  </div><!-- /.box-body -->
+
+                  <div class="box-footer">
+                    <?php
+					$abs_tgl_masuk=$date;
+					$abs_tampil_kar=$abt->abs_tampil_kar($kar_idtst,$abs_tgl_masuk);
+					while($data=mysql_fetch_array($abs_tampil_kar)){
+					  
+					  $kar_idtst=$data['kar_id'];
+					  $kar_tampil_id_abs=$kar->kar_tampil_id($kar_idtst);
+					  $kar_data_abs=mysql_fetch_array($kar_tampil_id_abs);
+					  
+					  $unt_id=$kar_data_abs['unt_id'];
+					  $ktr_id=$kar_data_abs['ktr_id'];
+						
+						$ip_tampil_unt_ktr=$ip->ip_tampil_unt_ktr($unt_id,$ktr_id);
+						$ip_data=mysql_fetch_array($ip_tampil_unt_ktr);
+					  
+					  if($data['abs_sts']=="P"){
+					    
+					    $lama_kerja=7; //khusus ramadhan ubah menjadi 7 jam
+						  
+					    $start_date = new DateTime(''.$data[abs_tgl_masuk].' '.$data[abs_masuk].'');
+					    $since_start = $start_date->diff(new DateTime(''.$data[abs_tgl_pulang].' '.$data[abs_pulang].''));
+					    /*echo $since_start->days.' days total<br>';
+					    echo $since_start->y.' years<br>';
+					    echo $since_start->m.' months<br>';
+					    echo $since_start->d.' days<br>';*/
+					    echo "<small>Anda Bekerja Selama:</small><br>";
+					    echo $since_start->h.' jam<br>';
+					    echo $since_start->i.' menit<br>';
+					    echo $since_start->s.' detik<br>';
+					    
+					    if($since_start->h < $lama_kerja){
+						    echo"<small>Kurang Dari ".$lama_kerja." Jam,</small> Grade: <span class='label label-danger'>Bad</span>";
+					    }elseif($since_start->h > $lama_kerja){
+						    echo"<small>Lebih Dari ".$lama_kerja." Jam,</small> Grade: <span class='label label-success'>Good</span>";
+					    }elseif($since_start->h = $lama_kerja){
+						    echo"<small>".$lama_kerja." Jam,</small> Grade: <span class='label label-primary'>Mediocre</span>";
+					    }
+					  }
+					  
+					  if(!($ip_data['ip_nm']==$data['abs_ip'])){
+					?>
+		  <!--<br><br>
+		  <div class="alert alert-danger alert-dismissable">
+                    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                    <h4><i class="icon fa fa-ban"></i> System Protected!</h4>
+                    Sistem kami telah menditeksi bahwa Anda absen dengan jaringan IP lain yaitu <strong><u><?php //echo $data['abs_ip'];?></u></strong>, <br> absen Anda secara sistem Kami ragukan, segera konfirmasi Departement SDM.
+		    <br><br>
+		    Laporkan segera apabila terjadi kesalahan seperti berikut:
+		    <ul>
+		      <li>Mati Listrik</li>
+		      <li>Reset Router/Modem</li>
+		      <li>Jaringan Mati/ tidak ada</li>
+		      <li>Beda Lokasi Login (Kantor)</li>
+		      <li>DLL <em>(yang mengakibatkan IP Address berubah)</em></li>
+		    </ul>
+		    <br>
+		    **)Bagi yang mengakses SIPEMA, tidak dapat login sebelum proteksi absen dihilangkan (Konfirmasi SDM/IT).
+		  </div>-->
+		  <?php }}?>
+                  </div>
+              </div><!-- /.box -->
+
+<!-- TRAP LOCATION-->
+<div class="modal fade" id="trap_location" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-md">
+    <div class="modal-content">
+      <div class="modal-header bg-yellow">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel"><i class="icon fa fa-warning"></i>
+		<strong>Peringatan!, Anda diluar radius</strong></h4>
+      </div>
+      <div class="modal-body">
+		<div class="row">
+			<div class="col-sm-12">
+			  <center>
+			  <h4>
+			  </h4>
+			  <div id="map"></div>
+			  </center>
+			</div>
+			<div class="col-sm-12">
+			  <center>
+			  <h4>
+			  </h4>
+			  <div><b>Apakah Anda Ingin Tetap Absen , di luar radius dan Terima resikonya</b> ?  <button type="button"  data-toggle="" id="masukya" class="btn btn-primary btn-sm"><i class="fa fa-sign-in"></i> Ya </button> <a class="btn btn-danger btn-sm" href="https://cb.web.id/media.php"> Tidak </a> </div>
+			  </center>
+			</div>
+				
+		</div>
+      </div>
+    </div>
+  </div>
+</div>
+			  
+<!-- Masuk -->
+<div class="modal fade" id="masuk" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg"> <!--modal-lg-->
+    <div class="modal-content">
+      <div class="modal-header bg-primary">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 style="<?php echo $title_rajin;?>" class="modal-title" id="myModalLabel"><i class="fa fa-map-marker"></i> Pilih <strong>Kantor</strong> / <strong>Unit</strong> dimana Anda akan melakukan <strong>Absen Masuk</strong></h4>
+        <h4 style="<?php echo $title_telat;?>" class="modal-title" id="myModalLabel"><i class="fa fa-meh-o"></i> Yahh.. Kamu telat masuk <strong><?php echo $ucapan; ?></strong> ya, tulis ya alasannya.. <i class="fa fa-exclamation-triangle"></i></h4>
+      </div>
+      <form class="form-horizontal" action="" method="post" id="myform">
+      <!--<form class="form-horizontal" action="" method="post">-->
+      <div class="modal-body">
+	
+	<div class="row">
+	    <div class="col-sm-4">
+	      	
+		<div class="form-group">
+		  <div class="col-sm-12">
+		    <center>
+			<div id="my_camera"></div>
+			<input id="mydata" type="hidden" name="mydata" value=""/>
+			<input id="babsmasuk" type="hidden" name="babsmasuk" value=""/>
+		    </center>	  
+		  </div>
+		</div>
+		
+	    </div>
+	    
+	    <div class="col-sm-8">
+	      
+		<div class="form-group" style="<?php echo $dispaly;?>">
+		  <label for="abs_alasan" class="col-sm-2 control-label">Alasan</label>
+		  <div class="col-sm-10">
+		    <textarea name="abs_alasan_masuk" class="form-control" rows="3" id="abs_alasan_masuk" placeholder="Wajib diisi..." required></textarea>
+		  </div>
+		</div>
+	    
+		<div class="form-group">
+		  <label for="abs_shift" class="col-sm-2 control-label">Shift</label>
+		  <div class="col-sm-10">
+		      <input type="radio" name="abs_shift" value="Shift Pagi" class="flat-red" id="abs_shift" <?php echo $checked_pagi;?> /> Pagi &nbsp;
+		      <input type="radio" name="abs_shift" value="Shift Siang" class="flat-red" id="abs_shift" <?php echo $checked_siang;?> /> Siang &nbsp;
+		      <input type="radio" name="abs_shift" value="Shift Sore" class="flat-red" id="abs_shift" <?php echo $checked_sore;?> /> Sore &nbsp;
+		      <input type="radio" name="abs_shift" value="Shift Malam" class="flat-red" id="abs_shift" <?php echo $checked_malam;?> /> Malam &nbsp; 
+		  </div>
+		</div>
+	       
+		<div class="form-group">
+		  <label for="abs_alasan" class="col-sm-2 control-label">Location</label>
+		  <div class="col-sm-10">
+			<?php
+			$ktr_id=$kar_data['ktr_id'];
+			?>
+		    <div class="bfh-selectbox" data-name="location" data-value="<?php echo $ktr_id;?>" data-filter="true">
+		    <?php
+			$ktr_tampil=$ktr->ktr_tampil();
+					if($ktr_tampil){
+					      foreach($ktr_tampil as $data){
+						 if(($data['ktr_aktif']=="A")){
+		    ?>
+					<div data-value="<?php echo $data['ktr_id'];?>"><?php echo $data['ktr_nm'];?></div>
+				<?php }}}?>	  
+				      </div>
+		  </div>
+		</div>
+	       
+	       <div class="form-group">
+		  <div class="col-sm-12" style="padding-left:5%;">
+		      <div class="alert alert-warning  alert-dismissable" align="left">
+			<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+			<!--<h4><i class="icon fa fa-warning"></i> PERHATIAN!</h4>
+			Ketika <strong>Absen Pulang</strong>, akan dicek berdasarkan lokasi <strong>Absen Masuk</strong> yang Anda pilih.-->
+			<h4><i class="icon fa fa-warning"></i> KEEP CALM!</h4>
+
+			<?php if($kar_data['div_id'] == 8){?>
+				<strong>Selamat bekerja</strong>, <strong>jangan lupa berdoa</strong>, <strong>selalu tersenyum</strong>, <strong>lakukan pekerjaan dengan baik.</strong><br><br>
+				<strong>Follow up BDC</strong>, <strong>Google Click</strong>, berusahalah <strong>dapat menyenangkan semua orang</strong> dan semoga <strong>hasil terbaik</strong> hari ini menghampiri Anda.
+			<?php }else{ ?>
+				<strong>Absensi via WebCam</strong> masih dalam tahap uji coba. Posisi kamera <strong>disebelah kiri</strong>.
+				<strong><a href="http://personalia.web.id/absen/tutor-absen-v2.jpg" target="_blank">Klik disini</a></strong> untuk tutorial.
+			<?php } ?>
+
+		      </div>
+			  <input type="hidden" class="form-control" id="latitude" value="<?php echo $kar_latlong['kar_lat'];?>">
+			  <input type="hidden" class="form-control" id="longitude" value="<?php echo $kar_latlong['kar_long'];?>">
+			  <input type="hidden" class="form-control" id="max_radius" value="<?php echo $kar_latlong['kar_radius'];?>">
+			  <input type="hidden" class="form-control" name="chc_nik" value="<?php echo $kar_datatst['kar_nik'];?>">
+			  <input type="hidden" class="form-control" name="chc_nama" value="<?php echo $kar_datatst['kar_nm'];?>">
+			  <div id="inpoyform"></div>
+		  </div>
+	      </div>
+	      
+	      <div class="modal-footer">
+		<span style="float:left;<?php echo $dispaly;?>"><small>Waktu:</small> <?php echo $ucapan; ?> <br> <small>Anda Terlambat:</small> <?php echo $jam_telat; ?></span>
+		<!--<button type="submit" name="babsmasuk" class="btn btn-primary"><i class="fa fa-hand-o-up"></i></button>-->
+		<span class="pull-right" id="btnmsg"><em>Please Wait...</em></span>
+		<button type="button" onClick="take_snapshot()" id="btnabsen" class="btn btn-primary pull-right"><i class="fa fa-hand-o-up"></i></button>
+	      </div>
+	    
+	    </div>
+	</div>
+	
+
+      </div>
+					 
+      </form>
+    </div>
+  </div>
+</div>
+         
+<!-- Pulang -->
+<div class="modal fade" id="pulang" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header bg-red">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+	<h4 style="<?php echo $title_tepat;?>" class="modal-title" id="myModalLabel"><i class="fa fa-smile-o"></i> See You Tomorrow <strong><?php echo $kar_data['kar_nm']; ?></strong>, Hati-hati dijalan...</h4>
+        <h4 style="<?php echo $title_cepat;?>" class="modal-title" id="myModalLabel"><i class="fa fa-meh-o"></i> Hayoo, baru jam segini ko udah mau pulang <strong><?php echo $shift; ?></strong>.. <i class="fa fa-exclamation-triangle"></i></h4>
+      </div>
+      <form class="form-horizontal" action="" method="post" id="myform2">
+      <div class="modal-body">
+	
+	<div class="row">
+	  
+	<div class="col-sm-4">
+	  
+	    <div class="form-group">
+		  <div class="col-sm-12">
+		    <center>
+			<div id="my_camera2"></div>
+			<input id="mydata2" type="hidden" name="mydata2" value=""/>
+			<input id="babspulang" type="hidden" name="babspulang" value=""/>
+		    </center>	  
+		  </div>
+		</div>
+	  
+	</div>
+	<div class="col-sm-8">
+	  
+          <div class="form-group" style="<?php echo $dispaly;?>">
+            <label for="abs_alasan" class="col-sm-2 control-label">Alasan</label>
+            <div class="col-sm-10">
+              <textarea name="abs_alasan_pulang" class="form-control" rows="3" id="abs_alasan_pulang" placeholder="Wajib diisi..." required></textarea>
+            </div>
+          </div>
+	  <div class="form-group">
+	      <div class="col-sm-12" style="padding-left:5%;">
+		  <div class="alert alert-warning  alert-dismissable" align="left">
+		    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+		    <!--<h4><i class="icon fa fa-warning"></i> PERHATIAN!</h4>
+		    Ketika <strong>Absen Pulang</strong>, akan dicek berdasarkan lokasi <strong>Absen Masuk</strong> yang Anda pilih.-->
+		    <h4><i class="icon fa fa-warning"></i> KEEP CALM!</h4>
+		    <strong>Absensi via WebCam</strong> masih dalam tahap uji coba. Posisi kamera <strong>disebelah kiri</strong>.
+		    <strong><a href="http://personalia.web.id/absen/tutor-absen-v2.jpg" target="_blank">Klik disini</a></strong> untuk tutorial.
+
+		  </div>
+	      </div>
+	  </div>
+	  
+	  <div class="modal-footer">
+	    <span style="float:left;<?php echo $dispaly;?>"><small>Waktu:</small> <?php echo $shift; ?> <br> <small><?php echo $message; ?></small> </span>
+	    <span class="pull-right" id="btnmsgpulang"><em>Please Wait...</em></span>
+	    <button type="button" onClick="take_snapshot2()" id="btnabsenpulang" class="btn btn-danger pull-right"><i class="fa fa-hand-o-up"></i></button>
+	  </div>
+	  
+	</div>
+      </div>	
+	
+      </div>
+      
+      
+      </form>
+    </div>
+  </div>
+</div>
+
+
+<!-- Pulang Kurang dari Target FU -->
+<div class="modal fade" id="pulang_target_fu" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-md">
+    <div class="modal-content">
+      <div class="modal-header bg-red">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 style="<?php echo $title_cepat;?>" class="modal-title" id="myModalLabel"><i class="fa fa-meh-o"></i>
+          Peringatan !... 
+        </h4>
+      </div>
+      <div class="modal-body">
+	<div class="row">
+	  <div class="col-sm-12">
+	    <center>
+	    <h4><i class="icon fa fa-warning"></i>
+		    Mohon maaf, FU anda baru  <font id="jml_fu"></font>
+		    <BR />Saat ini anda belum dapat melakukan absen pulang 
+		    <BR />sebelum melaksanakan Follow Up BDC <font id="target_fu"></font> data/hari.
+	    </h4>
+	    </center>
+	  </div>
+	</div>
+      </div>	
+    </div>
+  </div>
+</div>
+
+<!-- DISABLE PULANG -->
+<div class="modal fade" id="disable_pulang" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-md">
+    <div class="modal-content">
+      <div class="modal-header bg-red">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel"><i class="fa fa-meh-o"></i> Peringatan !...</h4>
+      </div>
+      <div class="modal-body">
+	<div class="row">
+	    <div class="col-sm-12">
+	      <center>
+	      <h4><i class="icon fa fa-warning"></i>
+		      Mohon maaf, untuk saat ini ANDA tidak diperbolehkan untuk pulang
+		      <br>
+		      silahkan hubungi SDM untuk penjelasan lebih lanjutnya.
+	      </h4>
+	      </center>
+	    </div>
+	</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- TRAP DAILY ACTIVITY -->
+<div class="modal fade" id="trap_daily_act" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-md">
+    <div class="modal-content">
+      <div class="modal-header bg-yellow">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel"><i class="fa fa-meh-o"></i> Peringatan !...</h4>
+      </div>
+      <div class="modal-body">
+	<div class="row">
+	    <div class="col-sm-12">
+	      <center>
+	      <h4><i class="icon fa fa-warning"></i>
+		      <strong>Anda belum bisa melakukan absensi pulang. 
+		      <br>
+		      Segera membuat dan mempublish Daily Activity terlebih dahulu!</strong>
+	      </h4>
+	      </center>
+	    </div>
+	</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Check Point 1-->
+<div class="modal fade" id="checkpoint1" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-md">
+    <div class="modal-content">
+      <div class="modal-header bg-purple">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel"><i class="fa fa-meh-o"> Pilih Absen</i></h4>
+      </div>
+      <div class="modal-body">
+	<div class="row">
+	    <div class="col-sm-12">
+	      <center>
+		  <!--
+	      <h4><i class="icon fa fa-success"></i>
+		      <strong></strong>
+	      </h4>
+		  -->
+		  <button type="button" id="submitmasuk" class="btn btn-success btn-lg"><i class="fa fa-sign-in"></i> Absen di dalam Radius</button> ||
+		  <button type="button" id="chc1"  class="btn btn-primary btn-lg"><i class="fa fa-sign-in"></i> Absen di Luar Radius </button>
+	      </center>
+	    </div>
+	</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Pulang Malam -->
+<div class="modal fade" id="pulangmalam" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header bg-green">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+	<h4 class="modal-title" id="myModalLabel"><i class="fa fa-smile-o"></i> See You Tomorrow <strong><?php echo $kar_data['kar_nm']; ?></strong>, Hati-hati dijalan, Jangan Ngantuk!!!</h4>
+      </div>
+      <form class="form-horizontal" action="" method="post" id="myform3">
+      <div class="modal-body">
+	
+	<div class="row">
+	  
+	<div class="col-sm-4">
+	  
+	    <div class="form-group">
+		  <div class="col-sm-12">
+		    <center>
+			<div id="my_camera3"></div>
+			<input id="mydata3" type="hidden" name="mydata3" value=""/>
+			<input id="babspulangmalam" type="hidden" name="babspulangmalam" value=""/>
+		    </center>	  
+		  </div>
+		</div>
+	  
+	</div>
+	<div class="col-sm-8">
+	  
+	  <div class="form-group">
+	      <div class="col-sm-12" style="padding-left:5%;">
+		  <div class="alert alert-warning  alert-dismissable" align="left">
+		    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+		    <!--<h4><i class="icon fa fa-warning"></i> PERHATIAN!</h4>
+		    Ketika <strong>Absen Pulang</strong>, akan dicek berdasarkan lokasi <strong>Absen Masuk</strong> yang Anda pilih.-->
+		    <h4><i class="icon fa fa-warning"></i> KEEP CALM!</h4>
+		    <strong>Absensi via WebCam</strong> masih dalam tahap uji coba. Posisi kamera <strong>disebelah kiri</strong>.
+		    <strong><a href="http://personalia.web.id/absen/tutor-absen-v2.jpg" target="_blank">Klik disini</a></strong> untuk tutorial.
+		  </div>
+	      </div>
+	  </div>
+	  
+	  <div class="modal-footer">
+	    <span class="pull-right" id="btnmsgpulangmalam"><em>Please Wait...</em></span>
+	    <button type="button" onClick="take_snapshot3()" id="btnabsenpulangmalam" class="btn btn-success pull-right"><i class="fa fa-hand-o-up"></i></button>
+	  </div>
+	  
+	</div>
+      </div>	
+	
+      </div>
+      
+      
+      </form>
+    </div>
+  </div>
+</div>
+ 
+<div class="modal fade" id="loading" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-md">
+    <div class="modal-content">
+      <div class="modal-header bg-red">	
+      </div>
+      <div class="modal-body">
+	<div class="row">
+	    <div class="col-sm-3">
+	      <center class="loader_bola"></center>
+	    </div>
+	    <div class="col-sm-7">
+	      <center>
+		<h4 ><i class="icon fa fa-warning"></i> Harap Tunggu !...<br /> Sedang Proses Cek FU BDC</h4>
+	      </center>
+	    </div>
+	</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<?php
+
+$url_cek_disable ="https://cb.web.id/cek_disable_pulang.php?nik=".$kar_data['kar_nik'];
+$url_cek_daily_act ="https://cb.web.id/cek_daily_activity.php?nik=".$kar_data['kar_nik'];
+$url_fu = "//daftarkuliah.my.id/bdc/x_crontab_activity.php?nik=".$kar_data['kar_nik']."&logika=".$kar_data['kar_logika'];
+if($kar_id==60 || $kar_id==118 || $kar_id==205 || $kar_id==269 || $kar_id==437 || $kar_id==518 ){
+    $url_fu = "//daftarkuliah.my.id/bdc/x_crontab_activity_penagihan.php?nik=".$kar_data['kar_nik'];
+}
+?>	
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+ <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+<script defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBTWSk-Yipimvagi0FeEtgRqvG-cXV8NhU&callback=initMap"></script>
+<script>
+$(document).ready(function(){
+  $("#submit").click(function(){
+	 var nik = $('#nik').val();
+	    $('#loading').modal('show');
+		$.ajax({
+		type: 'POST',
+		processData: false,
+		contentType: false,
+		url: "<?php echo $url_fu; ?>",	
+		crossDomain: true,
+		success: function(responseData, textStatus, jqXHR) {
+			var value = responseData.someKey;
+			//console.log(responseData); 
+			var obj = JSON.parse(responseData);
+			
+			$('#loading').modal('hide');
+			
+			var jml_fu = obj[0].jml_fu;
+			var target_fu = obj[1].target_fu;
+			
+			if(obj[1].status === 'disabled'){
+			  $('#jml_fu').html("<font color='red' size='5' >"+jml_fu+"</font>");
+			  $('#target_fu').html("<font color='red' size='5' >"+target_fu+"</font>");
+			  $('#pulang_target_fu').modal('show');
+			}else{
+			  $.ajax({
+				  type:"GET",
+				  url: "<?php echo $url_cek_disable; ?>",
+				  success: function(data) {
+					  //console.log("test",data)
+					  if(data == 'Y'){
+					      $('#disable_pulang').modal('show');
+					  }else{
+					      $.ajax({
+						      type:"GET",
+						      url: "<?php echo $url_cek_daily_act; ?>",
+						      success: function(data) {
+							      //console.log("dis_act",data)
+							      if(data == 'Y'){
+								      $('#trap_daily_act').modal('show');
+							      }else{
+								      $('#pulang').modal('show');
+							      }
+						      }
+					      });
+					  }
+				  }
+			  });
+			}
+		},
+		error: function (responseData, textStatus, errorThrown) {
+		  alert('POST failed.');
+		}
+	});
+  });
+});
+
+
+
+	var x = document.getElementById("posisi");
+	var s = document.getElementById("status");
+		
+          $("#submitmasuk").click(function(){
+
+			  if (navigator.geolocation) {
+
+				navigator.geolocation.getCurrentPosition(showPosition, showError_);
+
+			  } else { 
+
+				x.innerHTML = "Geolocation is not supported by this browser.";
+
+			  }
+		  });
+		  
+		  $("#masukya").click(function(){
+			  $('#masuk').modal('show');
+			  $('#trap_location').modal('hide');			  
+		  });
+              
+        function showPosition(position) { 
+          var radius = document.getElementById("max_radius").value;
+          n1 = document.getElementById("longitude").value;
+          t1 = document.getElementById("latitude").value;          
+          if (n1.length > 0 && t1.length > 0) {
+            lon = parseFloat(n1);
+            lat = parseFloat(t1);            
+            //alert(lat);              
+            var jarak = distance(position.coords.longitude, position.coords.latitude, lon, lat);
+			//console.log('aji:',jarak,radius);
+            if (jarak > radius) {					
+              //s.innerHTML = "<h5>Peringatan!, Anda diluar radius</h5>";			   
+			   $('#trap_location').modal('show');			   
+			   //$('#checkpoint1').modal('hide');	
+				var domhtml = "<input type='hidden' value="+ position.coords.longitude +" name='longitudepost'></input><br>"+
+				
+						      "<input type='hidden' value="+ position.coords.latitude +" name='latitudepost'></input><br>" +	
+							  
+				              "<input type='hidden' value='DI LUAR RADIUS' name='status_radius'></input><br>" +
+							  
+                              "<input type='hidden' value="+ jarak +" name='jarak'></input>";
+							  
+							  $('#inpoyform').html(domhtml);
+			
+				x.innerHTML = "<input type='hidden' value="+ position.coords.longitude +" name='longitudepost'></input><br>" +
+
+				              "<input type='hidden' value="+ position.coords.latitude +" name='latitudepost'></input><br>" +
+				
+							  "<input type='hidden' value='DI LUAR RADIUS' name='status_radius'></input><br>" +
+
+							  "<input type='hidden' value="+ jarak +" name='jarak'></input>"
+            }else{				
+			   $('#masuk').modal('show');
+			   //$('#checkpoint1').modal('hide');
+			   var domhtml = "<input type='hidden' value="+ position.coords.longitude +" name='longitudepost'></input><br>"+
+			   
+							 "<input type='hidden' value="+ position.coords.latitude +" name='latitudepost'></input><br>" +	
+						  
+				             "<input type='hidden' value='DI DALAM RADIUS' name='status_radius'></input><br>" +
+						  
+                             "<input type='hidden' value="+ jarak +" name='jarak'></input>"; 
+							 
+							 $('#inpoyform').html(domhtml);
+			
+			   x.innerHTML = "<input type='hidden' value="+ position.coords.longitude +" name='longitudepost'></input><br>" +
+
+							 "<input type='hidden' value="+ position.coords.latitude +" name='latitudepost'></input><br>" +
+				
+							 "<input type='hidden' value='DI DALAM RADIUS' name='status_radius'></input><br>" +
+
+				             "<input type='hidden' value="+ jarak +" name='jarak'></input>"
+			    
+			}   
+						      
+            var uluru = {lat: position.coords.latitude, lng: position.coords.longitude};
+
+            var uluru_center = {lat: lat, lng: lon};
+
+            var map = new google.maps.Map(
+
+                document.getElementById('map'), {zoom: 12, center: uluru}
+			
+			);
+                      
+            var marker = new google.maps.Marker({
+
+                position: uluru_center,
+
+                map: map,
+
+                icon: 'https://img.icons8.com/color/1x/avengers.png',
+
+            });
+            
+			var iconx = {
+				url: "https://cb.web.id/module/profile/img/SG00172004-20210607075730.jpg", // url
+				scaledSize: new google.maps.Size(40, 40), // scaled size
+				origin: new google.maps.Point(0,0), // origin
+				anchor: new google.maps.Point(0, 0) // anchor
+			};
+			
+            var marker = new google.maps.Marker({
+
+                position: uluru,
+
+                map: map,
+
+                icon: iconx,
+
+            });
+            
+            var meters = parseFloat(radius * 500);
+          
+            const circle = new google.maps.Circle({
+
+                strokeColor: "#007bff",
+
+                strokeOpacity: 0.8,
+
+                strokeWeight: 2,
+
+                fillColor: "#007bff",
+
+                fillOpacity: 0.35,
+
+                map,
+
+                center: uluru_center,
+
+                radius: meters
+
+            });
+         
+          }else{
+
+            x.innerHTML = "Silahkan isi Longitude & Latitude"
+
+            s.innerHTML = "-"
+
+          }
+
+        }
+		
+        function showError_(error) {
+
+          switch(error.code) {
+
+            case error.PERMISSION_DENIED:
+
+              x.innerHTML = "Pengguna menolak permintaan untuk GPS."
+
+              break;
+
+            case error.POSITION_UNAVAILABLE:
+
+              x.innerHTML = "Informasi lokasi tidak tersedia<br>Aktifkan Lokasi di HP kamu"
+
+              break;
+
+            case error.TIMEOUT:
+
+              x.innerHTML = "Waktu permintaan untuk mendapatkan lokasi pengguna habis."
+
+              break;
+
+            case error.UNKNOWN_ERROR:
+
+              x.innerHTML = "Terjadi kesalahan yang tidak diketahui."
+
+              break;
+
+          }
+
+        }
+
+        
+        function distance(lon1, lat1, lon2, lat2) {
+
+          var R = 6371; // Radius bumi dalam km
+
+          var dLat = (lat2-lat1).toRad();  // Fungsi javascript dalam radians
+
+          var dLon = (lon2-lon1).toRad(); 
+
+          var a = Math.sin(dLat/2) * Math.sin(dLat/2) +
+
+                  Math.cos(lat1.toRad()) * Math.cos(lat2.toRad()) * 
+
+                  Math.sin(dLon/2) * Math.sin(dLon/2); 
+
+          var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a)); 
+
+          var d = R * c; // Jarak dalam km
+
+          return round(d);
+
+        }
+
+        
+
+        if (typeof(Number.prototype.toRad) === "undefined") {
+
+          Number.prototype.toRad = function() {
+
+            return this * Math.PI / 180;
+
+          }
+
+        }
+
+        
+
+        function deg2rad(deg) {
+
+		rad = deg * Math.PI/180; // radians = degrees * pi/180
+
+		return rad;
+
+	}
+
+        
+
+        function round(x) {
+
+            return Math.round( x * 1000) / 1000;
+
+        }
+ 
+
+</script>

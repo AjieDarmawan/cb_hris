@@ -1,0 +1,31 @@
+{
+    "app": {
+        "sso": false,
+        "is_active": true,
+        "sesscokie": 2700,
+        "kelompok": "pt"
+    },
+    "base": {
+        "app": "dev-app",
+        "user": "default",
+        "pass": "default",
+        "color": "#ff00ff",
+        "usedb": "cllms_xxx_dev"
+    },
+    "third_party": {
+        "zoom": "",
+        "drive": "",
+        "firebase": ""
+    },
+    "info": {
+        "nama": "PT. Gilland Ganesha",
+        "singkatan": "",
+        "strlat": 0,
+        "strlong": 0,
+        "alamat": "",
+        "website": "",
+        "email": "",
+        "telepon": "",
+        "fax": ""
+    }
+}

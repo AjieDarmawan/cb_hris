@@ -1,0 +1,76 @@
+<?php namespace DummyNamespace;
+
+use Illuminate\Http\Request;
+
+use DummyRootNamespaceHttp\Controllers\Controller;
+use DummyNamespace\DummyModel as MainModel; // Modelnya
+
+use Barryvdh\DomPDF\Facade as PDF;
+use Maatwebsite\Excel\Facades\Excel as Excel;
+
+use PhpOffice\PhpWord\PhpWord as Word;
+use PhpOffice\PhpWord\Shared\Html as WordHtml;
+use PhpOffice\PhpWord\IOFactory as WordIOFactory;
+
+class DummyClass extends Controller
+{
+	
+    public function __construct()
+    {
+        $this->middleware('auth:api', ['except' => ['listdata','detaildata']]);
+    }
+	
+	public function index()
+	{
+		$pegawai = TestModel::all();
+		return view('pegawai',['pegawai'=>$pegawai]);
+	}
+	
+	public function show($id)
+    {
+        $data = Todos::where('id', $id)->get();
+        return response($data);
+    }
+	
+    public function store(Request $request)
+    {
+        $data = new Todos();
+        $data->activity = $request->input('activity');
+        $data->description = $request->input('description');
+        $data->save();
+
+        return response('Berhasil Tambah Data');
+    }
+	
+    public function update(Request $request, $id)
+    {
+        $data = Todos::where('id', $id)->first();
+        $data->activity = $request->input('activity');
+        $data->description = $request->input('description');
+        $data->save();
+
+        return response()->json([
+			'error' => 'Email does not exist.'
+		], 400);
+    }
+
+    public function destroy($id)
+    {
+        $data = Todos::where('id', $id)->first();
+        $data->delete();
+
+        return response('Berhasil Menghapus Data');
+    }
+	
+	
+	
+	public function listdata() 
+	{
+		
+	}
+	
+	public function detaildata()
+	{
+		
+	}
+}

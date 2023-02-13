@@ -1,0 +1,486 @@
+@font-face {
+    font-family: "Open Sans";
+    /* src: url("../font/Eina01-Regular.ttf"); */
+    src: url("../font/open-sans-regular.ttf");
+}
+
+body {
+    font-family: "Open Sans";
+    background: #F9F9F9 !important;
+}
+
+
+/* Modify the background color */
+
+@media only screen and (min-width: 800px) {
+    .navbar-custom {
+        background: none;
+    }
+    
+    .navbar-custom.oren {
+        background-color: #F77F00 !important;
+    }
+    
+    .navbar-custom.scrolled {
+        background-color: #F77F00 !important;
+        transition: background-color 200ms linear;
+    }
+}
+
+@media only screen and (max-width: 799px) {
+    .navbar-custom {
+        background-color: #F77F00 !important;
+    }
+    
+    .navbar-custom.oren {
+        background-color: #F77F00 !important;
+    }
+    
+    .navbar-custom.scrolled {
+        background-color: #F77F00 !important;
+        transition: background-color 200ms linear;
+    }
+}
+
+
+/* Modify brand color */
+
+.navbar-custom .navbar-brand {
+    color: #FFFFFF;
+}
+
+
+/* Modify item color */
+
+.card-border {
+    border: 1px solid #003049;
+    box-shadow: 0px 3px 6px #00000029;
+    border-radius: 0px 0px 8px 8px;
+}
+
+.card-border-empty {
+    border: 1px solid #003049;
+    box-shadow: 0px 3px 6px #00000029;
+    border-radius: 8px 8px 8px 8px;
+}
+
+.navbar-custom .navbar-nav .nav-item .nav-link {
+    color: #003049;
+    margin-right: 20px;
+}
+
+.text-primary {
+    color: #003049!important;
+}
+
+.text-oren {
+    font: normal normal normal 19px/26px Open Sans;
+    letter-spacing: 0px;
+    color: #F77F00;
+}
+
+.bg-primary {
+    background-color: #FCBF49!important;
+    color: white!important;
+}
+
+.bg-oren {
+    background-color: #F77F00!important;
+}
+
+.bg-biru {
+    background-color: #002038!important;
+    color: white!important;
+}
+
+.bg-secondary {
+    background-color: #EAE2B7!important;
+}
+
+.bg-warning {
+    background-color: #FCBF49!important;
+}
+
+.bg-nonaktif {
+    background-color: #f3f3f3;
+}
+
+.btn {
+    transition: 0.1s;
+    border-radius: 20px;
+}
+
+
+/* .btn:hover { */
+
+
+/* transform: translateY(-2px); */
+
+
+/* } */
+
+.btn-primary {
+    background-color: #003049;
+    border-color: #003049;
+    color: #fff;
+}
+
+.btn-primary:hover {
+    background-color: #002038;
+    border-color: #002038;
+    color: #fff;
+}
+
+.btn-outline-primary {
+    color: #000;
+    border-color: #003049;
+}
+
+.btn-outline-primary:hover {
+    color: #fff!important;
+    background-color: #002038;
+    border-color: #002038;
+}
+
+.btn-success {
+    background-color: #FCBF49;
+    border-color: #FCBF49;
+    color: #fff!important;
+    font-weight: bold;
+}
+
+.btn-success:hover {
+    background-color: #084020;
+    border-color: #084020;
+    color: #fff!important;
+    font-weight: bold;
+}
+
+.btn-warning {
+    background-color: #FDE614;
+    border-color: #FDE614;
+    color: #020024;
+    font-weight: bold;
+}
+
+.btn-warning:hover {
+    background-color: #ffd51e;
+    border-color: #ffd51e;
+    color: #020024;
+    font-weight: bold;
+}
+
+.btn-whatsapp {
+    background-color: #4FC05D;
+    border-color: #4FC05D;
+    color: #fff;
+    font-weight: bold;
+}
+
+.btn-whatsapp:hover {
+    background-color: #1A9412;
+    border-color: #1A9412;
+    color: #fff;
+    font-weight: bold;
+    /* transform: rotate(-360deg); */
+}
+
+.btn-facebook {
+    background-color: #385490;
+    border-color: #385490;
+    color: #fff;
+    font-weight: bold;
+}
+
+.btn-facebook:hover {
+    background-color: #2a4682;
+    border-color: #2a4682;
+    color: #fff;
+    font-weight: bold;
+    /* transform: rotate(-360deg); */
+}
+
+.btn-twitter {
+    background-color: #1C99E6;
+    border-color: #1C99E6;
+    color: #fff;
+    font-weight: bold;
+}
+
+.btn-twitter:hover {
+    background-color: #0995ed;
+    border-color: #0995ed;
+    color: #fff;
+    font-weight: bold;
+    /* transform: rotate(-360deg); */
+}
+
+.btn-tiktok {
+    background-color: #000000;
+    border-color: #000000;
+    color: #FDFEFF;
+    font-weight: bold;
+}
+
+.btn-tiktok:hover {
+    background-color: #000000;
+    border-color: #E22359;
+    color: #FDFEFF;
+    font-weight: bold;
+    /* transform: rotate(-360deg); */
+}
+
+.btn-line {
+    background-color: #01BB03;
+    border-color: #01BB03;
+    color: #FDFEFF;
+    font-weight: bold;
+}
+
+.btn-line:hover {
+    background-color: #019604;
+    border-color: #019604;
+    color: #FDFEFF;
+    font-weight: bold;
+    /* transform: rotate(-360deg); */
+}
+
+.btn-instagram {
+    background-color: #E70E49;
+    border-color: #B609B9;
+    color: #FDFEFF;
+    font-weight: bold;
+}
+
+.btn-instagram:hover {
+    background-color: #E60871;
+    border-color: #9a059d;
+    color: #FDFEFF;
+    font-weight: bold;
+    /* transform: rotate(-360deg); */
+}
+
+.logo-img {
+    height: 128px;
+    padding: 8px;
+    position: relative;
+    margin-bottom: 8px;
+    border-radius: 4px;
+}
+
+.logo-img-100 {
+    height: 100px;
+    padding: 8px;
+    position: relative;
+    margin-bottom: 8px;
+    border-radius: 4px;
+}
+
+.logo-img-100 img {
+    max-height: 80px;
+    width: auto!important;
+}
+
+#owl-kampus img {
+    border-radius: 14px;
+}
+
+#kampus .item {
+    height: 72px;
+    margin: auto;
+    align-items: center !important;
+    justify-content: center !important;
+}
+
+#kampus img {
+    max-height: 64px;
+    border-radius: 8px;
+    margin: auto;
+}
+
+.border-tengah {
+    display: block;
+    width: 80px;
+    height: 4px;
+    background: #FCBF49;
+    margin: 16px auto;
+}
+
+.border-kiri {
+    display: block;
+    width: 80px;
+    height: 4px;
+    background: #FCBF49;
+    margin-bottom: 16px;
+    margin-top: 16px;
+}
+
+.border-full {
+    display: block;
+    width: 100%;
+    height: 4px;
+    background: #FCBF49;
+}
+
+.i-testi {
+    color: #FCBF49;
+}
+
+.card-testimoni {
+    /* border-radius: 1rem; */
+    box-shadow: 0px -10px 0px RGB(252, 191, 74);
+    background: #EAE2B7 0% 0% no-repeat padding-box;
+    border-radius: 16px;
+}
+
+.team-item {
+    transition: .5s;
+}
+
+.team-item .rounded-circle {
+    border-radius: 14px !important;
+}
+
+.team-item:hover {
+    transition: .5s;
+}
+
+.team-item h5 {
+    font-weight: bold;
+}
+
+.team-item img {
+    transition: .5s;
+}
+
+.team-item img:hover {
+    transform: scale(1.1);
+}
+
+.overlay {
+    background: rgba(247, 127, 0, 0.7);
+}
+
+#event .title {
+    font: normal normal bold 24px/33px Open Sans;
+    letter-spacing: 0px;
+    color: #111111;
+}
+
+#list-event .card {
+    border-radius: 8px
+}
+
+#list-event .card-header {
+    background: #FCBF49 0% 0% no-repeat padding-box;
+    box-shadow: 0px 3px 6px #00000029;
+    border-radius: 8px 8px 0px 0px;
+    border: 1px solid #003049;
+}
+
+#list-event .card-body {
+    background: #EEEEEE 0% 0% no-repeat padding-box;
+    border: 1px solid #003049;
+    border-radius: 0px 0px 8px 8px;
+}
+
+#list-event .card .title {
+    font: normal normal bold 20px/27px Open Sans;
+    letter-spacing: 0px;
+    color: #0F0F0F;
+}
+
+#list-event .card .desc {
+    font: normal normal normal 18px/24px Open Sans;
+    letter-spacing: 0px;
+    color: #101010;
+}
+
+#list-event .card .tanggal {
+    font: normal normal bold 14px/19px Open Sans;
+    letter-spacing: 0px;
+    color: #152955;
+}
+
+#list-event .btn {
+    box-shadow: 0px 3px 6px #00000029;
+    font: normal normal bold 16px/18px Open Sans;
+    letter-spacing: 0px;
+    color: #fff;
+    height: 32px;
+}
+
+#latihan .btn {
+    font: normal normal bold 18px/24px Open Sans;
+    letter-spacing: 0px;
+    color: #0C0C0C;
+}
+
+#latihan .btn:hover {
+    color: #fff;
+}
+
+#latihan .title {
+    font: normal normal bold 24px/33px Open Sans;
+    letter-spacing: 0px;
+    color: #111111;
+}
+
+#list-latihan .card {
+    background: #FFFFFF;
+    box-shadow: 0px 3px 6px #00000029;
+    border: 1px solid #003049;
+    border-radius: 8px;
+}
+
+#list-latihan .card .title {
+    font: normal normal bold 16px/22px Open Sans;
+    letter-spacing: 0px;
+    color: #101010;
+}
+
+#list-latihan .card .subtitle {
+    font: normal normal normal 14px/19px Open Sans;
+    letter-spacing: 0px;
+    color: #101010;
+}
+
+#list-latihan .card-body {
+    font: normal normal normal 19px/26px Open Sans;
+    letter-spacing: 0px;
+    color: #003049;
+}
+
+#list-latihan .card-body a {
+    font: normal normal bold 17px/23px Open Sans;
+    letter-spacing: 0px;
+    color: #003049;
+    text-decoration: none;
+}
+
+.swal2-title {
+    font: normal normal bold 32px/43px Open Sans!important;
+    color: #003049!important;
+}
+
+.swal2-styled.swal2-confirm {
+    background: #003049!important;
+    border-radius: 24px!important;
+}
+
+.swal2-styled.swal2-confirm:hover {
+    background: #152955!important;
+}
+
+.swal2-styled.swal2-cancel {
+    background: #fff!important;
+    border: 1px solid #003049!important;
+    color: #003049!important;
+    border-radius: 24px!important;
+}
+
+.swal2-styled.swal2-cancel:hover {
+    background: #003049!important;
+    border: 1px solid #003049!important;
+    color: #fff!important;
+}

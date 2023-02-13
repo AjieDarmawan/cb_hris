@@ -1,0 +1,866 @@
+{
+    "pt": {
+        "en": {
+            "admin": [
+                {
+                    "label": "Dashboard",
+                    "link": "\/main\/dashboard",
+                    "icon": "bar_chart",
+                    "activeIcon": "favorite"
+                },
+                {
+                    "label": "Basis Data",
+                    "icon": "radio_button_unchecked",
+                    "items": [
+                        {
+                            "label": "Dosen",
+                            "link": "\/main\/dosen",
+                            "icon": "radio_button_unchecked",
+                            "activeIcon": "radio_button_checked",
+                            "aksi": {
+                                "ls": "list",
+                                "cr": "create",
+                                "ed": "edit",
+                                "sh": "show",
+                                "de": "delete",
+                                "up": "uploda",
+                                "dw": "download",
+                                "ex": "export",
+                                "im": "import",
+                                "sn": "sinkron"
+                            },
+                            "param": {
+                                "mk": [
+                                    "MKT001"
+                                ],
+                                "fak": [
+                                    "FT"
+                                ],
+                                "prodi": [
+                                    "S1AK",
+                                    "S1MA"
+                                ],
+                                "cabang": []
+                            }
+                        },
+                        {
+                            "label": "Mahasiswa",
+                            "link": "\/main\/mahasiswa",
+                            "icon": "favorite_border",
+                            "activeIcon": "favorite"
+                        },
+                        {
+                            "label": "Akademik",
+                            "icon": "favorite_border",
+                            "items": [
+                                {
+                                    "label": "Fakultas",
+                                    "link": "\/main\/fakultas",
+                                    "icon": "favorite_border",
+                                    "activeIcon": "favorite"
+                                },
+                                {
+                                    "label": "Program Studi",
+                                    "link": "\/main\/program-studi",
+                                    "icon": "favorite_border",
+                                    "activeIcon": "favorite"
+                                },
+                                {
+                                    "label": "Program Perkuliahan",
+                                    "link": "\/main\/program-perkuliahan",
+                                    "icon": "favorite_border",
+                                    "activeIcon": "favorite"
+                                },
+                                {
+                                    "label": "Semester Thn Akademik",
+                                    "link": "\/main\/semester-thn-akademik",
+                                    "icon": "favorite_border",
+                                    "activeIcon": "favorite"
+                                },
+                                {
+                                    "label": "Kelompok Mata Kuliah",
+                                    "link": "\/main\/kelompok-mata-kuliah",
+                                    "icon": "favorite_border",
+                                    "activeIcon": "favorite"
+                                },
+                                {
+                                    "label": "Ruang & Kelas",
+                                    "link": "\/main\/ruang-dan-kelas",
+                                    "icon": "favorite_border",
+                                    "activeIcon": "favorite"
+                                },
+                                {
+                                    "label": "Kurikulum (Mata kuliah)",
+                                    "link": "\/main\/mata-kuliah",
+                                    "icon": "favorite_border",
+                                    "activeIcon": "favorite"
+                                },
+                                {
+                                    "label": "Grade Nilai",
+                                    "link": "\/main\/grade-nilai",
+                                    "icon": "favorite_border",
+                                    "activeIcon": "favorite"
+                                }
+                            ]
+                        },
+                        {
+                            "label": "Konfigurasi Aplikasi",
+                            "link": "\/main\/konfigurasi-aplikasi",
+                            "icon": "favorite_border",
+                            "activeIcon": "favorite"
+                        }
+                    ]
+                },
+                {
+                    "label": "Perkuliahan",
+                    "icon": "favorite_border",
+                    "items": [
+                        {
+                            "label": "Jadwal Kuliah",
+                            "link": "\/main\/jadwal-kuliah",
+                            "icon": "favorite_border",
+                            "activeIcon": "favorite"
+                        },
+                        {
+                            "label": "Peserta Kuliah (KRS)",
+                            "link": "\/main\/peserta-kuliah",
+                            "icon": "favorite_border",
+                            "activeIcon": "favorite"
+                        },
+                        {
+                            "label": "Dokumen Mata Kuliah",
+                            "link": "\/main\/dokumen-mata-kuliah",
+                            "icon": "favorite_border",
+                            "activeIcon": "favorite"
+                        },
+                        {
+                            "label": "Manajemen Kelas",
+                            "link": "\/main\/manajemen-kelas",
+                            "icon": "favorite_border",
+                            "activeIcon": "favorite"
+                        },
+                        {
+                            "label": "Kelas Online",
+                            "link": "\/main\/kelas-online",
+                            "icon": "favorite_border",
+                            "activeIcon": "favorite"
+                        }
+                    ]
+                },
+                {
+                    "label": "Manajemen Aplikasi",
+                    "icon": "favorite_border",
+                    "items": [
+                        {
+                            "label": "User",
+                            "link": "\/main\/user",
+                            "icon": "favorite_border",
+                            "activeIcon": "favorite"
+                        },
+                        {
+                            "label": "Banner",
+                            "link": "\/main\/banner",
+                            "icon": "favorite_border",
+                            "activeIcon": "favorite"
+                        },
+                        {
+                            "label": "Galeri",
+                            "link": "\/main\/galeri",
+                            "icon": "favorite_border",
+                            "activeIcon": "favorite"
+                        },
+                        {
+                            "label": "Informasi",
+                            "link": "\/main\/informasi",
+                            "icon": "favorite_border",
+                            "activeIcon": "favorite"
+                        },
+                        {
+                            "label": "Pengumuman",
+                            "link": "\/main\/pengumuman",
+                            "icon": "favorite_border",
+                            "activeIcon": "favorite"
+                        },
+                        {
+                            "label": "Kalender Akademik",
+                            "link": "\/main\/kalender-akademik",
+                            "icon": "favorite_border",
+                            "activeIcon": "favorite"
+                        }
+                    ]
+                },
+                {
+                    "label": "Laporan",
+                    "icon": "favorite_border",
+                    "items": [
+                        {
+                            "label": "Absensi Dosen",
+                            "link": "\/main\/absensi-dosen",
+                            "icon": "favorite_border",
+                            "activeIcon": "favorite"
+                        },
+                        {
+                            "label": "Absensi Mahasiswa",
+                            "link": "\/main\/absensi-mahasiswa",
+                            "icon": "favorite_border",
+                            "activeIcon": "favorite"
+                        },
+                        {
+                            "label": "Berita Acara",
+                            "link": "\/main\/berita-acara",
+                            "icon": "favorite_border",
+                            "activeIcon": "favorite"
+                        }
+                    ]
+                }
+            ]
+        },
+        "id": {
+            "admin": [
+                {
+                    "label": "Dashboard",
+                    "link": "\/main\/dashboard",
+                    "icon": "favorite_border",
+                    "activeIcon": "favorite"
+                },
+                {
+                    "label": "Basis Data",
+                    "icon": "favorite_border",
+                    "items": [
+                        {
+                            "label": "Dosen",
+                            "link": "\/main\/dosen",
+                            "icon": "favorite_border",
+                            "activeIcon": "favorite",
+                            "aksi": {
+                                "ls": "list",
+                                "cr": "create",
+                                "ed": "edit",
+                                "sh": "show",
+                                "de": "delete",
+                                "up": "uploda",
+                                "dw": "download",
+                                "ex": "export",
+                                "im": "import",
+                                "sn": "sinkron"
+                            },
+                            "param": {
+                                "mk": [
+                                    "MKT001"
+                                ],
+                                "fak": [
+                                    "FT"
+                                ],
+                                "prodi": [
+                                    "S1AK",
+                                    "S1MA"
+                                ],
+                                "cabang": []
+                            }
+                        },
+                        {
+                            "label": "Mahasiswa",
+                            "link": "\/main\/mahasiswa",
+                            "icon": "favorite_border",
+                            "activeIcon": "favorite"
+                        },
+                        {
+                            "label": "Akademik",
+                            "icon": "favorite_border",
+                            "items": [
+                                {
+                                    "label": "Fakultas",
+                                    "link": "\/main\/fakultas",
+                                    "icon": "favorite_border",
+                                    "activeIcon": "favorite"
+                                },
+                                {
+                                    "label": "Program Studi",
+                                    "link": "\/main\/program-studi",
+                                    "icon": "favorite_border",
+                                    "activeIcon": "favorite"
+                                },
+                                {
+                                    "label": "Program Perkuliahan",
+                                    "link": "\/main\/program-perkuliahan",
+                                    "icon": "favorite_border",
+                                    "activeIcon": "favorite"
+                                },
+                                {
+                                    "label": "Semester Thn Akademik",
+                                    "link": "\/main\/semester-thn-akademik",
+                                    "icon": "favorite_border",
+                                    "activeIcon": "favorite"
+                                },
+                                {
+                                    "label": "Kelompok Mata Kuliah",
+                                    "link": "\/main\/kelompok-mata-kuliah",
+                                    "icon": "favorite_border",
+                                    "activeIcon": "favorite"
+                                },
+                                {
+                                    "label": "Ruang & Kelas",
+                                    "link": "\/main\/ruang-dan-kelas",
+                                    "icon": "favorite_border",
+                                    "activeIcon": "favorite"
+                                },
+                                {
+                                    "label": "Kurikulum (Mata kuliah)",
+                                    "link": "\/main\/mata-kuliah",
+                                    "icon": "favorite_border",
+                                    "activeIcon": "favorite"
+                                },
+                                {
+                                    "label": "Grade Nilai",
+                                    "link": "\/main\/grade-nilai",
+                                    "icon": "favorite_border",
+                                    "activeIcon": "favorite"
+                                }
+                            ]
+                        },
+                        {
+                            "label": "Konfigurasi Aplikasi",
+                            "link": "\/main\/konfigurasi-aplikasi",
+                            "icon": "favorite_border",
+                            "activeIcon": "favorite"
+                        }
+                    ]
+                },
+                {
+                    "label": "Perkuliahan",
+                    "icon": "favorite_border",
+                    "items": [
+                        {
+                            "label": "Jadwal Kuliah",
+                            "link": "\/main\/jadwal-kuliah",
+                            "icon": "favorite_border",
+                            "activeIcon": "favorite"
+                        },
+                        {
+                            "label": "Peserta Kuliah (KRS)",
+                            "link": "\/main\/peserta-kuliah",
+                            "icon": "favorite_border",
+                            "activeIcon": "favorite"
+                        },
+                        {
+                            "label": "Dokumen Mata Kuliah",
+                            "link": "\/main\/dokumen-mata-kuliah",
+                            "icon": "favorite_border",
+                            "activeIcon": "favorite"
+                        },
+                        {
+                            "label": "Manajemen Kelas",
+                            "link": "\/main\/manajemen-kelas",
+                            "icon": "favorite_border",
+                            "activeIcon": "favorite"
+                        },
+                        {
+                            "label": "Kelas Online",
+                            "link": "\/main\/kelas-online",
+                            "icon": "favorite_border",
+                            "activeIcon": "favorite"
+                        }
+                    ]
+                },
+                {
+                    "label": "Manajemen Aplikasi",
+                    "icon": "favorite_border",
+                    "items": [
+                        {
+                            "label": "User",
+                            "link": "\/main\/user",
+                            "icon": "favorite_border",
+                            "activeIcon": "favorite"
+                        },
+                        {
+                            "label": "Banner",
+                            "link": "\/main\/banner",
+                            "icon": "favorite_border",
+                            "activeIcon": "favorite"
+                        },
+                        {
+                            "label": "Galeri",
+                            "link": "\/main\/galeri",
+                            "icon": "favorite_border",
+                            "activeIcon": "favorite"
+                        },
+                        {
+                            "label": "Informasi",
+                            "link": "\/main\/informasi",
+                            "icon": "favorite_border",
+                            "activeIcon": "favorite"
+                        },
+                        {
+                            "label": "Pengumuman",
+                            "link": "\/main\/pengumuman",
+                            "icon": "favorite_border",
+                            "activeIcon": "favorite"
+                        },
+                        {
+                            "label": "Kalender Akademik",
+                            "link": "\/main\/kalender-akademik",
+                            "icon": "favorite_border",
+                            "activeIcon": "favorite"
+                        }
+                    ]
+                },
+                {
+                    "label": "Laporan",
+                    "icon": "favorite_border",
+                    "items": [
+                        {
+                            "label": "Absensi Dosen",
+                            "link": "\/main\/absensi-dosen",
+                            "icon": "favorite_border",
+                            "activeIcon": "favorite"
+                        },
+                        {
+                            "label": "Absensi Mahasiswa",
+                            "link": "\/main\/absensi-mahasiswa",
+                            "icon": "favorite_border",
+                            "activeIcon": "favorite"
+                        },
+                        {
+                            "label": "Berita Acara",
+                            "link": "\/main\/berita-acara",
+                            "icon": "favorite_border",
+                            "activeIcon": "favorite"
+                        }
+                    ]
+                }
+            ]
+        }
+    },
+    "nonpt": {
+        "en": {
+            "admin": [
+                {
+                    "label": "Dashboard",
+                    "link": "\/main\/dashboard",
+                    "icon": "favorite_border",
+                    "activeIcon": "favorite"
+                },
+                {
+                    "label": "Basis Data",
+                    "icon": "favorite_border",
+                    "items": [
+                        {
+                            "label": "Dosen",
+                            "link": "\/main\/dosen",
+                            "icon": "favorite_border",
+                            "activeIcon": "favorite",
+                            "aksi": {
+                                "ls": "list",
+                                "cr": "create",
+                                "ed": "edit",
+                                "sh": "show",
+                                "de": "delete",
+                                "up": "uploda",
+                                "dw": "download",
+                                "ex": "export",
+                                "im": "import",
+                                "sn": "sinkron"
+                            },
+                            "param": {
+                                "mk": [
+                                    "MKT001"
+                                ],
+                                "fak": [
+                                    "FT"
+                                ],
+                                "prodi": [
+                                    "S1AK",
+                                    "S1MA"
+                                ],
+                                "cabang": []
+                            }
+                        },
+                        {
+                            "label": "Mahasiswa",
+                            "link": "\/main\/mahasiswa",
+                            "icon": "favorite_border",
+                            "activeIcon": "favorite"
+                        },
+                        {
+                            "label": "Akademik",
+                            "icon": "favorite_border",
+                            "items": [
+                                {
+                                    "label": "Fakultas",
+                                    "link": "\/main\/fakultas",
+                                    "icon": "favorite_border",
+                                    "activeIcon": "favorite"
+                                },
+                                {
+                                    "label": "Program Studi",
+                                    "link": "\/main\/program-studi",
+                                    "icon": "favorite_border",
+                                    "activeIcon": "favorite"
+                                },
+                                {
+                                    "label": "Program Perkuliahan",
+                                    "link": "\/main\/program-perkuliahan",
+                                    "icon": "favorite_border",
+                                    "activeIcon": "favorite"
+                                },
+                                {
+                                    "label": "Semester Thn Akademik",
+                                    "link": "\/main\/semester-thn-akademik",
+                                    "icon": "favorite_border",
+                                    "activeIcon": "favorite"
+                                },
+                                {
+                                    "label": "Kelompok Mata Kuliah",
+                                    "link": "\/main\/kelompok-mata-kuliah",
+                                    "icon": "favorite_border",
+                                    "activeIcon": "favorite"
+                                },
+                                {
+                                    "label": "Ruang & Kelas",
+                                    "link": "\/main\/ruang-dan-kelas",
+                                    "icon": "favorite_border",
+                                    "activeIcon": "favorite"
+                                },
+                                {
+                                    "label": "Kurikulum (Mata kuliah)",
+                                    "link": "\/main\/mata-kuliah",
+                                    "icon": "favorite_border",
+                                    "activeIcon": "favorite"
+                                },
+                                {
+                                    "label": "Grade Nilai",
+                                    "link": "\/main\/grade-nilai",
+                                    "icon": "favorite_border",
+                                    "activeIcon": "favorite"
+                                }
+                            ]
+                        },
+                        {
+                            "label": "Konfigurasi Aplikasi",
+                            "link": "\/main\/konfigurasi-aplikasi",
+                            "icon": "favorite_border",
+                            "activeIcon": "favorite"
+                        }
+                    ]
+                },
+                {
+                    "label": "Perkuliahan",
+                    "icon": "favorite_border",
+                    "items": [
+                        {
+                            "label": "Jadwal Kuliah",
+                            "link": "\/main\/jadwal-kuliah",
+                            "icon": "favorite_border",
+                            "activeIcon": "favorite"
+                        },
+                        {
+                            "label": "Peserta Kuliah (KRS)",
+                            "link": "\/main\/peserta-kuliah",
+                            "icon": "favorite_border",
+                            "activeIcon": "favorite"
+                        },
+                        {
+                            "label": "Dokumen Mata Kuliah",
+                            "link": "\/main\/dokumen-mata-kuliah",
+                            "icon": "favorite_border",
+                            "activeIcon": "favorite"
+                        },
+                        {
+                            "label": "Manajemen Kelas",
+                            "link": "\/main\/manajemen-kelas",
+                            "icon": "favorite_border",
+                            "activeIcon": "favorite"
+                        },
+                        {
+                            "label": "Kelas Online",
+                            "link": "\/main\/kelas-online",
+                            "icon": "favorite_border",
+                            "activeIcon": "favorite"
+                        }
+                    ]
+                },
+                {
+                    "label": "Manajemen Aplikasi",
+                    "icon": "favorite_border",
+                    "items": [
+                        {
+                            "label": "User",
+                            "link": "\/main\/user",
+                            "icon": "favorite_border",
+                            "activeIcon": "favorite"
+                        },
+                        {
+                            "label": "Banner",
+                            "link": "\/main\/banner",
+                            "icon": "favorite_border",
+                            "activeIcon": "favorite"
+                        },
+                        {
+                            "label": "Galeri",
+                            "link": "\/main\/galeri",
+                            "icon": "favorite_border",
+                            "activeIcon": "favorite"
+                        },
+                        {
+                            "label": "Informasi",
+                            "link": "\/main\/informasi",
+                            "icon": "favorite_border",
+                            "activeIcon": "favorite"
+                        },
+                        {
+                            "label": "Pengumuman",
+                            "link": "\/main\/pengumuman",
+                            "icon": "favorite_border",
+                            "activeIcon": "favorite"
+                        },
+                        {
+                            "label": "Kalender Akademik",
+                            "link": "\/main\/kalender-akademik",
+                            "icon": "favorite_border",
+                            "activeIcon": "favorite"
+                        }
+                    ]
+                },
+                {
+                    "label": "Laporan",
+                    "icon": "favorite_border",
+                    "items": [
+                        {
+                            "label": "Absensi Dosen",
+                            "link": "\/main\/absensi-dosen",
+                            "icon": "favorite_border",
+                            "activeIcon": "favorite"
+                        },
+                        {
+                            "label": "Absensi Mahasiswa",
+                            "link": "\/main\/absensi-mahasiswa",
+                            "icon": "favorite_border",
+                            "activeIcon": "favorite"
+                        },
+                        {
+                            "label": "Berita Acara",
+                            "link": "\/main\/berita-acara",
+                            "icon": "favorite_border",
+                            "activeIcon": "favorite"
+                        }
+                    ]
+                }
+            ]
+        },
+        "id": {
+            "admin": [
+                {
+                    "label": "Dashboard",
+                    "link": "\/main\/dashboard",
+                    "icon": "favorite_border",
+                    "activeIcon": "favorite"
+                },
+                {
+                    "label": "Basis Data",
+                    "icon": "favorite_border",
+                    "items": [
+                        {
+                            "label": "Dosen",
+                            "link": "\/main\/dosen",
+                            "icon": "favorite_border",
+                            "activeIcon": "favorite",
+                            "aksi": {
+                                "ls": "list",
+                                "cr": "create",
+                                "ed": "edit",
+                                "sh": "show",
+                                "de": "delete",
+                                "up": "uploda",
+                                "dw": "download",
+                                "ex": "export",
+                                "im": "import",
+                                "sn": "sinkron"
+                            },
+                            "param": {
+                                "mk": [
+                                    "MKT001"
+                                ],
+                                "fak": [
+                                    "FT"
+                                ],
+                                "prodi": [
+                                    "S1AK",
+                                    "S1MA"
+                                ],
+                                "cabang": []
+                            }
+                        },
+                        {
+                            "label": "Mahasiswa",
+                            "link": "\/main\/mahasiswa",
+                            "icon": "favorite_border",
+                            "activeIcon": "favorite"
+                        },
+                        {
+                            "label": "Akademik",
+                            "icon": "favorite_border",
+                            "items": [
+                                {
+                                    "label": "Fakultas",
+                                    "link": "\/main\/fakultas",
+                                    "icon": "favorite_border",
+                                    "activeIcon": "favorite"
+                                },
+                                {
+                                    "label": "Program Studi",
+                                    "link": "\/main\/program-studi",
+                                    "icon": "favorite_border",
+                                    "activeIcon": "favorite"
+                                },
+                                {
+                                    "label": "Program Perkuliahan",
+                                    "link": "\/main\/program-perkuliahan",
+                                    "icon": "favorite_border",
+                                    "activeIcon": "favorite"
+                                },
+                                {
+                                    "label": "Semester Thn Akademik",
+                                    "link": "\/main\/semester-thn-akademik",
+                                    "icon": "favorite_border",
+                                    "activeIcon": "favorite"
+                                },
+                                {
+                                    "label": "Kelompok Mata Kuliah",
+                                    "link": "\/main\/kelompok-mata-kuliah",
+                                    "icon": "favorite_border",
+                                    "activeIcon": "favorite"
+                                },
+                                {
+                                    "label": "Ruang & Kelas",
+                                    "link": "\/main\/ruang-dan-kelas",
+                                    "icon": "favorite_border",
+                                    "activeIcon": "favorite"
+                                },
+                                {
+                                    "label": "Kurikulum (Mata kuliah)",
+                                    "link": "\/main\/mata-kuliah",
+                                    "icon": "favorite_border",
+                                    "activeIcon": "favorite"
+                                },
+                                {
+                                    "label": "Grade Nilai",
+                                    "link": "\/main\/grade-nilai",
+                                    "icon": "favorite_border",
+                                    "activeIcon": "favorite"
+                                }
+                            ]
+                        },
+                        {
+                            "label": "Konfigurasi Aplikasi",
+                            "link": "\/main\/konfigurasi-aplikasi",
+                            "icon": "favorite_border",
+                            "activeIcon": "favorite"
+                        }
+                    ]
+                },
+                {
+                    "label": "Perkuliahan",
+                    "icon": "favorite_border",
+                    "items": [
+                        {
+                            "label": "Jadwal Kuliah",
+                            "link": "\/main\/jadwal-kuliah",
+                            "icon": "favorite_border",
+                            "activeIcon": "favorite"
+                        },
+                        {
+                            "label": "Peserta Kuliah (KRS)",
+                            "link": "\/main\/peserta-kuliah",
+                            "icon": "favorite_border",
+                            "activeIcon": "favorite"
+                        },
+                        {
+                            "label": "Dokumen Mata Kuliah",
+                            "link": "\/main\/dokumen-mata-kuliah",
+                            "icon": "favorite_border",
+                            "activeIcon": "favorite"
+                        },
+                        {
+                            "label": "Manajemen Kelas",
+                            "link": "\/main\/manajemen-kelas",
+                            "icon": "favorite_border",
+                            "activeIcon": "favorite"
+                        },
+                        {
+                            "label": "Kelas Online",
+                            "link": "\/main\/kelas-online",
+                            "icon": "favorite_border",
+                            "activeIcon": "favorite"
+                        }
+                    ]
+                },
+                {
+                    "label": "Manajemen Aplikasi",
+                    "icon": "favorite_border",
+                    "items": [
+                        {
+                            "label": "User",
+                            "link": "\/main\/user",
+                            "icon": "favorite_border",
+                            "activeIcon": "favorite"
+                        },
+                        {
+                            "label": "Banner",
+                            "link": "\/main\/banner",
+                            "icon": "favorite_border",
+                            "activeIcon": "favorite"
+                        },
+                        {
+                            "label": "Galeri",
+                            "link": "\/main\/galeri",
+                            "icon": "favorite_border",
+                            "activeIcon": "favorite"
+                        },
+                        {
+                            "label": "Informasi",
+                            "link": "\/main\/informasi",
+                            "icon": "favorite_border",
+                            "activeIcon": "favorite"
+                        },
+                        {
+                            "label": "Pengumuman",
+                            "link": "\/main\/pengumuman",
+                            "icon": "favorite_border",
+                            "activeIcon": "favorite"
+                        },
+                        {
+                            "label": "Kalender Akademik",
+                            "link": "\/main\/kalender-akademik",
+                            "icon": "favorite_border",
+                            "activeIcon": "favorite"
+                        }
+                    ]
+                },
+                {
+                    "label": "Laporan",
+                    "icon": "favorite_border",
+                    "items": [
+                        {
+                            "label": "Absensi Dosen",
+                            "link": "\/main\/absensi-dosen",
+                            "icon": "favorite_border",
+                            "activeIcon": "favorite"
+                        },
+                        {
+                            "label": "Absensi Mahasiswa",
+                            "link": "\/main\/absensi-mahasiswa",
+                            "icon": "favorite_border",
+                            "activeIcon": "favorite"
+                        },
+                        {
+                            "label": "Berita Acara",
+                            "link": "\/main\/berita-acara",
+                            "icon": "favorite_border",
+                            "activeIcon": "favorite"
+                        }
+                    ]
+                }
+            ]
+        }
+    }
+}

@@ -1,0 +1,86 @@
+{
+    "data\/dosen": {
+        "path": "Config",
+        "subdir": "Dosen",
+        "module": "DosenController"
+    },
+	
+	"data\/kelas": {
+        "path": "Config",
+        "subdir": "Kelas",
+        "module": "KelasController"
+    },
+	
+	"data\/ruang-kelas": {
+        "path": "Config",
+        "subdir": "RuangKelas",
+        "module": "RuangKelasController"
+    },
+	
+	"data\/mata-kuliah": {
+        "path": "Config",
+        "subdir": "MataKuliah",
+        "module": "MataKuliahController"
+    },
+	
+	 "data\/jadwal-kuliah": {
+        "path": "Config",
+        "subdir": "JadwalKuliah",
+        "module": "JadwalKuliahController"
+    },
+	
+	
+	
+	"data\/manajemen-kelas": {
+        "path": "Modules",
+        "subdir": "Pertemuan",
+        "module": "PertemuanController"
+    },
+	
+	"data\/kelas-online": {
+        "path": "Modules",
+        "subdir": "KelasOnline",
+        "module": "KelasOnlineController"
+    },
+
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	"data\/fakultas": {
+        "path": "Config",
+        "subdir": "Fakultas",
+        "module": "FakultasController"
+    },
+    "data\/jurusan": {
+        "path": "Config",
+        "subdir": "Jurusan",
+        "module": "JurusanController"
+    },
+    "data\/kurikulum": {
+        "path": "Config",
+        "subdir": "Kurikulum",
+        "module": "KurikulumController"
+    },
+	
+    "data\/kartu-rencana-studi": {
+        "path": "Config",
+        "subdir": "KartuRencanaStudi",
+        "module": "KartuRencanaStudiController"
+    },
+    "data\/semester": {
+        "path": "Config",
+        "subdir": "Semester",
+        "module": "SemesterController"
+    },
+    "data\/tahun-akademik": {
+        "path": "Config",
+        "subdir": "TahunAkademik",
+        "module": "TahunAkademikController"
+    }
+}

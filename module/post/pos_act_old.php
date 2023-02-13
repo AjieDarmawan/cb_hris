@@ -1,0 +1,20 @@
+<?php
+$page=$_GET['p'];
+$act=$_GET['act'];
+$pos_id=$_GET['id'];
+
+if(isset($page)&&($act=="hapus")){
+    $pos_delete=$pos->pos_delete($pos_id);
+    echo"<script>document.location='?p=$page';</script>";
+}
+elseif(isset($page)&&($act=="block")){
+    $pos_sts="N";
+    $pos_update_sts=$pos->pos_update_sts($pos_id,$pos_sts);
+    echo"<script>document.location='?p=$page';</script>";
+}
+elseif(isset($page)&&($act=="unblock")){
+    $pos_sts="A";
+    $pos_update_sts=$pos->pos_update_sts($pos_id,$pos_sts);
+    echo"<script>document.location='?p=$page';</script>";
+}
+?>
